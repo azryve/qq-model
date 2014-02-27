@@ -29,7 +29,6 @@ size_t rand_v(double *vec, size_t vec_size, struct distr_param_s distr_param){
 	}
 	return i;
 }
-
 /*
 int main(){
 	double *rand = (double*)malloc(1000*sizeof(double));

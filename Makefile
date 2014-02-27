@@ -5,4 +5,4 @@ rand:
 	gcc -o rand_test rand_test.c
 
 new:
-	gcc -o model_new model_new.c gsl/gsl.c -I /opt/local/include -Wl,/opt/local/lib/libgsl.a
+	gcc -o model_new model_new.c gsl/gsl.c -lgsl -lgslcblas -lm
