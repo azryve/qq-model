@@ -29,3 +29,4 @@ size_t rand_v(double *vec, size_t vec_size, struct distr_param_s distr_param){
 	}
 	return i;
 }
+

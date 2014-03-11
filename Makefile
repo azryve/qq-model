@@ -1,8 +1,12 @@
-all:
-	gcc -o model model.c
+all: model
 
-rand:
-	gcc -o rand_test rand_test.c
+model:
+	gcc  -O3 -o model model.c vecs.c gsl/gsl.c -lgsl -lgslcblas -lm
 
-new:
-	gcc  -O3 -o model_new model_new.c vecs.c gsl/gsl.c -lgsl -lgslcblas -lm
+
+pdfclean:
+	make -C latex clean
+
+pdf: pdfclean
+	make -C latex all
+	
