@@ -200,17 +200,20 @@ int main(int argc, char* argv[]){
 
 		size_t s = size;
 		double *output_vec = (double*) malloc(s * sizeof(double));
+		double *output_vec2 = (double*) malloc(s * sizeof(double));
 		output_vec[0] = q_vec[0];
-		double aq = 0;
+		double aq1=0, aq2 = 0;
 		for(i=1; i < s; ++i) {
-			aq+=q_vec[i];
-			output_vec[i] = fmax(aq, output_vec[i-1]) + s_vec[i]; 			/* if i-1 query left before i arrived take aq (absolute clock
+			aq1+=q_vec[i];
+			if(aq1<aq2) { printf("Overflow of out\n"); rc=3; goto end; }
+			aq2=aq1;
+			output_vec[i] = fmax(aq2, output_vec[i-1]) + s_vec[i]; 			/* if i-1 query left before i arrived take aq (absolute clock
 																			else take i-1 departue time + i serve time */
 		}
-		for(i=s - 2; i > 0; --i) {
-			output_vec[i] -= output_vec[i-1];
+		for(i=0; i < s-1; ++i) {
+			output_vec2[i] = output_vec[i+1] - output_vec[i];
 		}
-		out_vec("./latex/data.depart", output_vec, colns);
+		out_vec_bars("./latex/data.depart", output_vec2, s-1, colns);
 		free(output_vec);
 	}
 
